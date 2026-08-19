@@ -7,7 +7,13 @@ TOKEN="$(cat "$HOME/.codex/nuwax-lz-token" 2>/dev/null | tr -d '[:space:]')"
 if command -v jq >/dev/null 2>&1; then
   TEXT=$(printf '%s' "$INPUT" | jq -r '
     (.tool_input.command // .tool_input.shell // "") as $cmd |
-    if $cmd != "" then "Codex 需要你审批：执行命令 " + $cmd
+    (($cmd | gsub("\\s+"; " ") | gsub("^\\s+|\\s+$"; ""))) as $norm |
+    if $cmd != "" and $norm != "" then
+      ($norm / " ") as $parts |
+      if (["git","npm","npx","yarn","pnpm","cargo","go","python","python3","pip","pip3","docker","kubectl","brew","apt","apt-get","codex"] | index($parts[0])) != null and $parts[1] != null
+      then "Codex 需要你审批：" + $parts[0] + " " + $parts[1]
+      else "Codex 需要你审批：" + $parts[0]
+      end
     elif .tool_name == "apply_patch" then "Codex 需要你审批：修改代码"
     else "Codex 需要你审批：" + (.tool_name // "执行操作")
     end' 2>/dev/null)
@@ -16,6 +22,7 @@ if command -v jq >/dev/null 2>&1; then
 elif command -v python3 >/dev/null 2>&1; then
   TEXT=$(printf '%s' "$INPUT" | python3 -c '
 import json, sys
+KNOWN = {"git","npm","npx","yarn","pnpm","cargo","go","python","python3","pip","pip3","docker","kubectl","brew","apt","apt-get","codex"}
 try:
     d = json.load(sys.stdin)
     ti = d.get("tool_input") or {}
@@ -23,7 +30,11 @@ try:
         ti = {}
     cmd = ti.get("command") or ti.get("shell") or ""
     if cmd:
-        text = "Codex 需要你审批：执行命令 " + str(cmd)
+        parts = cmd.split()
+        prog = parts[0]
+        if prog in KNOWN and len(parts) > 1:
+            prog += " " + parts[1]
+        text = "Codex 需要你审批：" + prog
     elif d.get("tool_name") == "apply_patch":
         text = "Codex 需要你审批：修改代码"
     else:

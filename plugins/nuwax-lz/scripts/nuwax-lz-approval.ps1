@@ -13,9 +13,14 @@ if ($ti -is [System.Management.Automation.PSCustomObject]) {
   if ([string]::IsNullOrEmpty($cmd)) { $cmd = [string]$ti.shell }
 }
 if (-not [string]::IsNullOrEmpty($cmd)) {
-  $cmd = ($cmd -replace '\s+', ' ').Trim()
-  if ($cmd.Length -gt 60) { $cmd = $cmd.Substring(0, 60) }
-  $text = 'Codex 需要你审批：执行命令 ' + $cmd
+  $parts = (($cmd -replace '\s+', ' ').Trim()) -split ' '
+  $prog = [string]$parts[0]
+  $known = @('git','npm','npx','yarn','pnpm','cargo','go','python','python3','pip','pip3','docker','kubectl','brew','apt','apt-get','codex')
+  if ($known -contains $prog -and $parts.Count -gt 1 -and -not [string]::IsNullOrEmpty([string]$parts[1])) {
+    $prog = $prog + ' ' + [string]$parts[1]
+  }
+  if ([string]::IsNullOrEmpty($prog)) { $prog = '执行操作' }
+  $text = 'Codex 需要你审批：' + $prog
 } else {
   $toolName = [string]$p.tool_name
   if ([string]::IsNullOrWhiteSpace($toolName)) { $toolName = '执行操作' }

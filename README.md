@@ -31,7 +31,7 @@ App 页复制对应平台的一键安装命令：
 | Windows PowerShell | App 页 PowerShell 命令，无需 bash（需已安装 Git） |
 | Windows Git Bash / WSL | 同 macOS/Linux 命令：Git Bash 装给 Windows 原生 Codex，WSL 装给 WSL 内的 Linux Codex |
 
-安装脚本会：校验令牌 → 写入 `~/.codex/nuwax-lz-token` 与 `~/.codex/nuwax-lz-host` → 添加 marketplace 并安装 `nuwax-lz@nuwax` 插件（hooks + skill）。重启 Codex 生效，首次会提示审查新钩子，确认即可。默认 marketplace 为 Gitee，App 生成的命令会自动带上仓库地址。
+安装脚本会：校验令牌 → 写入 `~/.codex/nuwax-lz-token` 与 `~/.codex/nuwax-lz-host` → 在 `~/.codex/config.toml` 启用沙箱联网（skill 主动播报免审批，卸载时自动清理）→ 添加 marketplace 并安装 `nuwax-lz@nuwax` 插件（hooks + skill）。重启 Codex 生效，首次会提示审查新钩子，确认即可。默认 marketplace 为 Gitee，App 生成的命令会自动带上仓库地址。
 
 ## 播报场景
 
