@@ -1,6 +1,6 @@
 {
   "name": "nuwax-lz",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "女娲灵珠播报：Claude Code 任务完成 / 需要授权时，推送到你的女娲灵珠设备语音播报",
   "author": {
     "name": "Nuwax"
@@ -10,7 +10,7 @@
       "type": "string",
       "title": "设备令牌",
       "description": "打开女娲灵珠 App → 设备详情 →「Agent 接入」页复制的设备令牌（lz_ 开头）",
-      "sensitive": true,
+      "sensitive": false,
       "required": true
     }
   }

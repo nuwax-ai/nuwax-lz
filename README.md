@@ -8,11 +8,11 @@ Claude Code 任务完成 / 需要授权时，推送到你的女娲灵珠设备�
 2. 终端中执行：
 
    ```
-   claude plugin marketplace add https://github.com/nuwax-ai/nuwax-lz
+   claude plugin marketplace add https://github.com/nuwax-ai/nuwax-lz.git
    claude plugin install nuwax-lz@nuwax --config nuwax_lz_token=lz_你的令牌
    ```
 
-装完即生效（令牌经 `--config` 写入本机 Keychain）。此后：
+装完即生效（令牌经 `--config` 写入本机 `~/.claude/settings.json`）。令牌重置后在 App 复制新令牌，于 Claude Code 会话内运行 `/plugin configure nuwax-lz@nuwax` 更新（重新执行安装命令不会更新已装插件的令牌）。此后：
 
 | 场景 | 设备播报 |
 |---|---|
@@ -44,7 +44,7 @@ Codex 官方 notify 目前仅支持任务完成事件（无授权提醒）。
 
 ## 更新
 
-- **Claude Code 插件**：执行 `claude plugin update nuwax-lz@nuwax`，然后 `/reload-plugins`（或重启 Claude Code）使新 hooks 生效。令牌保存在你自己的 Keychain 中，更新后无需重新填写。
+- **Claude Code 插件**：执行 `claude plugin update nuwax-lz@nuwax`，然后 `/reload-plugins`（或重启 Claude Code）使新 hooks 生效。令牌保存在你本机 `~/.claude/settings.json`，更新插件无需重新填写。
 - **Codex 脚本**：从 App「Agent 接入」页重新复制一键安装命令再执行一次即可（幂等，会覆盖脚本并刷新 AGENTS.md 指引与 skill，不影响现有配置）。
 - 仅服务端调整（播报文案、频率限制等）时无需任何操作，自动生效。
 
@@ -52,6 +52,6 @@ Codex 官方 notify 目前仅支持任务完成事件（无授权提醒）。
 
 安装后无播报：
 
-1. `claude plugin list` 检查 nuwax-lz 已启用；令牌填错或已重置时，重新执行安装命令（`--config` 会覆盖更新），然后 `/reload-plugins`
+1. `claude plugin list` 检查 nuwax-lz 已启用；令牌填错或已重置时，在 Claude Code 会话内运行 `/plugin configure nuwax-lz@nuwax` 更新令牌，然后 `/reload-plugins`
 2. 设备须在线且 App 内语音播报开启
 3. hook 请求失败不提示，可在本会话直接执行 skill 中的 curl 命令验证连通性
