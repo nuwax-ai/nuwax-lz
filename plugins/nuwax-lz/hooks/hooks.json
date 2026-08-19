@@ -4,14 +4,9 @@
       {
         "hooks": [
           {
-            "type": "http",
-            "url": "https://desk-buddy.nuwao.com/api/agent-cli/v1/hooks",
-            "headers": {
-              "Authorization": "Bearer $CLAUDE_PLUGIN_OPTION_NUWAX_LZ_TOKEN",
-              "Content-Type": "application/json"
-            },
-            "allowedEnvVars": ["CLAUDE_PLUGIN_OPTION_NUWAX_LZ_TOKEN"],
-            "timeout": 10
+            "type": "command",
+            "timeout": 15,
+            "command": "curl -s -o /dev/null --max-time 10 -X POST https://desk-buddy.nuwao.com/api/agent-cli/v1/hooks -H \"Authorization: Bearer $CLAUDE_PLUGIN_OPTION_NUWAX_LZ_TOKEN\" -H \"Content-Type: application/json\" -d @-"
           }
         ]
       }
@@ -21,14 +16,9 @@
         "matcher": "",
         "hooks": [
           {
-            "type": "http",
-            "url": "https://desk-buddy.nuwao.com/api/agent-cli/v1/hooks",
-            "headers": {
-              "Authorization": "Bearer $CLAUDE_PLUGIN_OPTION_NUWAX_LZ_TOKEN",
-              "Content-Type": "application/json"
-            },
-            "allowedEnvVars": ["CLAUDE_PLUGIN_OPTION_NUWAX_LZ_TOKEN"],
-            "timeout": 10
+            "type": "command",
+            "timeout": 15,
+            "command": "curl -s -o /dev/null --max-time 10 -X POST https://desk-buddy.nuwao.com/api/agent-cli/v1/hooks -H \"Authorization: Bearer $CLAUDE_PLUGIN_OPTION_NUWAX_LZ_TOKEN\" -H \"Content-Type: application/json\" -d @-"
           }
         ]
       }
