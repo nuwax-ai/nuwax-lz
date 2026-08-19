@@ -1,0 +1,22 @@
+{
+  "name": "nuwax-lz",
+  "version": "0.1.1",
+  "description": "女娲灵珠播报：Codex 任务完成 / 需要审批时，推送到你的女娲灵珠设备语音播报",
+  "author": {
+    "name": "Nuwax"
+  },
+  "skills": "./codex-skills/",
+  "hooks": "./hooks/codex-hooks.json",
+  "interface": {
+    "displayName": "女娲灵珠播报",
+    "shortDescription": "任务完成/审批时播报到女娲灵珠设备",
+    "longDescription": "Codex 每轮任务完成、需要你审批时，以及你要求播报时，推送到女娲灵珠设备语音播报。令牌从 ~/.codex/nuwax-lz-token 读取，由 App 安装命令写入。",
+    "developerName": "Nuwax",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": []
+  }
+}

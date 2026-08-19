@@ -1,0 +1,30 @@
+{
+  "hooks": {
+    "PermissionRequest": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${PLUGIN_ROOT}/scripts/nuwax-lz-approval.sh",
+            "commandWindows": "powershell.exe -NoProfile -ExecutionPolicy Bypass -Command \"& '$env:PLUGIN_ROOT\\scripts\\nuwax-lz-approval.ps1'\"",
+            "timeout": 10,
+            "async": true,
+            "statusMessage": "nuwax-lz 审批播报"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${PLUGIN_ROOT}/scripts/nuwax-lz-stop.sh",
+            "commandWindows": "powershell.exe -NoProfile -ExecutionPolicy Bypass -Command \"& '$env:PLUGIN_ROOT\\scripts\\nuwax-lz-stop.ps1'\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}
