@@ -5,10 +5,14 @@ Claude Code 任务完成 / 需要授权时，推送到你的女娲灵珠设备�
 ## 安装
 
 1. 女娲灵珠 App → 设备详情 →「Agent 接入」页，复制安装命令（已内置设备令牌）
-2. 终端中执行：
+2. 终端中执行（第一步二选一，国内网络建议 Gitee）：
 
    ```
+   # 第一步：添加 marketplace（二选一）
+   claude plugin marketplace add https://gitee.com/nuwax/nuwax-lz.git
    claude plugin marketplace add https://github.com/nuwax-ai/nuwax-lz.git
+
+   # 第二步：安装插件
    claude plugin install nuwax-lz@nuwax --config nuwax_lz_token=lz_你的令牌
    ```
 
