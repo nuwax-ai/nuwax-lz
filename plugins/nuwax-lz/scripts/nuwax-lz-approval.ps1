@@ -6,28 +6,7 @@ if (-not (Test-Path $tokenFile)) { exit 0 }
 $token = (Get-Content -Raw -Encoding UTF8 $tokenFile).Trim()
 if ([string]::IsNullOrEmpty($token)) { exit 0 }
 try { $p = $raw | ConvertFrom-Json } catch { exit 0 }
-$ti = $p.tool_input
-$cmd = $null
-if ($ti -is [System.Management.Automation.PSCustomObject]) {
-  $cmd = [string]$ti.command
-  if ([string]::IsNullOrEmpty($cmd)) { $cmd = [string]$ti.shell }
-}
-if (-not [string]::IsNullOrEmpty($cmd)) {
-  $parts = (($cmd -replace '\s+', ' ').Trim()) -split ' '
-  $prog = [string]$parts[0]
-  $known = @('git','npm','npx','yarn','pnpm','cargo','go','python','python3','pip','pip3','docker','kubectl','brew','apt','apt-get','codex')
-  if ($known -contains $prog -and $parts.Count -gt 1 -and -not [string]::IsNullOrEmpty([string]$parts[1])) {
-    $prog = $prog + ' ' + [string]$parts[1]
-  }
-  if ([string]::IsNullOrEmpty($prog)) { $prog = '执行操作' }
-  $text = 'Codex 需要你审批：' + $prog
-} else {
-  $toolName = [string]$p.tool_name
-  if ([string]::IsNullOrWhiteSpace($toolName)) { $toolName = '执行操作' }
-  if ($toolName -eq 'apply_patch') { $text = 'Codex 需要你审批：修改代码' }
-  else { $text = 'Codex 需要你审批：' + $toolName }
-}
-$body = @{ type = 'approval-requested'; session_id = [string]$p.session_id; cwd = [string]$p.cwd; text = $text } | ConvertTo-Json -Compress
+$body = @{ type = 'approval-requested'; session_id = [string]$p.session_id; cwd = [string]$p.cwd } | ConvertTo-Json -Compress
 $hostUrl = 'https://desk-buddy.nuwao.com'
 $hostFile = Join-Path $env:USERPROFILE '.codex\nuwax-lz-host'
 if (Test-Path $hostFile) {
