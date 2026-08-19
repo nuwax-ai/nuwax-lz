@@ -14,7 +14,7 @@ esc() { printf '%s' "$1" | tr '\n\r' '  ' | sed 's/\\/\\\\/g; s/"/\\"/g'; }
 curl -s --max-time 5 -X POST "https://desk-buddy.nuwao.com/api/agent-cli/v1/hooks" \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json" \
-  -d "{\"hook_event_name\":\"Notification\",\"notification_type\":\"say\",\"session_id\":\"say-$(date +%s)\",\"cwd\":\"$(esc "$PWD")\",\"text\":\"$(esc "$TEXT")\"}"
+  -d "{\"hook_event_name\":\"Notification\",\"notification_type\":\"say\",\"session_id\":\"say-$(date +%s)-$RANDOM\",\"cwd\":\"$(esc "$PWD")\",\"text\":\"$(esc "$TEXT")\"}"
 ```
 
 说明：
