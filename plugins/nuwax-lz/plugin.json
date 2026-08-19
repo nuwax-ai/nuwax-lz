@@ -1,0 +1,17 @@
+{
+  "name": "nuwax-lz",
+  "version": "0.1.0",
+  "description": "女娲灵珠播报：Claude Code 任务完成 / 需要授权时，推送到你的女娲灵珠设备语音播报",
+  "author": {
+    "name": "Nuwax"
+  },
+  "userConfig": {
+    "nuwax_lz_token": {
+      "type": "string",
+      "title": "设备令牌",
+      "description": "打开女娲灵珠 App → 设备详情 →「CLI 接入」页复制的令牌（lz_ 开头）",
+      "sensitive": true,
+      "required": true
+    }
+  }
+}

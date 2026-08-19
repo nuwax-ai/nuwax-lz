@@ -1,0 +1,15 @@
+{
+  "name": "nuwax",
+  "owner": {
+    "name": "Nuwax",
+    "url": "https://nuwax.com"
+  },
+  "plugins": [
+    {
+      "name": "nuwax-lz",
+      "source": "./plugins/nuwax-lz",
+      "description": "女娲灵珠播报：Claude Code 任务完成 / 需要授权时，推送到你的女娲灵珠设备语音播报",
+      "version": "0.1.0"
+    }
+  ]
+}
